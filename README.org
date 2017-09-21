@@ -8,7 +8,7 @@
 
 这是在Emacs中使用的中文输入法，主要程序是从 https://github.com/zilongshanren/chinese-wbim 移植过来的，基本设置和chinese-wbim一样，改进部分如下：
 
- - 码表文件 wb.txt 采用了Vim版本中的码表cy.txt，具体汉字编码方式参见： http://vim.baow.com/cyim
+ - 码表文件采用了Vim版本中的码表cy.txt，具体汉字编码方式参见： http://vim.baow.com/cyim
  - 实现了4个字母对应一个单词时，自动上屏。
  - 大写英文字母自动切换到英文模式
 
