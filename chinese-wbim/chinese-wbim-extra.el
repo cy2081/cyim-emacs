@@ -101,17 +101,28 @@ If you don't like this funciton, set the variable to nil")
   (interactive)
   (if current-input-method
       (let (c)
-        (message (format "自定义输入(直接空格%s, 回车%c): "
-                         (cdr chinese-wbim-insert-ascii-char)
-                         (car chinese-wbim-insert-ascii-char)))
+        (message "英文：")
         (setq c (read-event))
         (cond ((= c ? ) (insert (cdr chinese-wbim-insert-ascii-char)))
               ((= c ?\r) (insert-char (car chinese-wbim-insert-ascii-char) 1))
               (t
                (setq unread-command-events (list last-input-event))
-               (insert (read-from-minibuffer "自定义输入: ")))))
+               (insert (read-from-minibuffer "英文：")))))
     (call-interactively 'self-insert-command)))
 
+(defun chinese-cy-insert-en ()
+  (interactive)
+  (if current-input-method
+      (let (c)
+	      (message (char-to-string last-input-event))
+	      (insert (char-to-string last-input-event))
+        (setq c (read-event))
+        (cond ((= c ? ) (insert (cdr chinese-wbim-insert-ascii-char)))
+              ((= c ?\r) (insert-char (car chinese-wbim-insert-ascii-char) 1))
+              (t
+               (setq unread-command-events (list last-input-event))
+               (insert (read-from-minibuffer (char-to-string last-command-event))))))
+    (call-interactively 'self-insert-command)))
 ;;;_. load and save history
 (defun chinese-wbim-load-history (history-file package)
   (let* ((chinese-wbim-current-package package)
