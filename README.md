@@ -45,6 +45,9 @@
 ;; 设置输入法开关 
 (global-set-key (kbd "M-SPC") 'toggle-input-method)
 
+;; 设置英文标点切换
+(global-set-key (kbd "C-,") 'chinese-wbim-punc-translate-toggle)
+
 ```
 
 如果使用Spacemacs，基本方式类似。
