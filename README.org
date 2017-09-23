@@ -1,4 +1,4 @@
-*cyim 穿越中文输入法 Emacs 版本*
+*穿越中文输入法 Emacs 版本*
 
 版本： 0.9
 
@@ -62,6 +62,10 @@ TODO： 加入编程词汇表。
 汉字的编码方案请参见Vim版中的说明： 
 
 http://vim.baow.com/cyim/data/20121015181207/index.html
+
+* Android 手机
+
+先安装Termux和黑客键盘（Hacker’s Keyboard），再安装Emacs，再按照上边的方法配置。
 
 * Linux Fcitx 版本
 请把 fcitx/table 中的文件， 复制到主目录中的 .config/fcitx/table 中。可能需要重启fcitx，然后选择穿越中文输入法。

@@ -1,9 +1,10 @@
 - [Emacs 版本](#sec-1)
-- [Linux Fcitx 版本](#sec-2)
-- [Vim 版本](#sec-3)
-- [Windows 版本](#sec-4)
+- [Android 手机](#sec-2)
+- [Linux Fcitx 版本](#sec-3)
+- [Vim 版本](#sec-4)
+- [Windows 版本](#sec-5)
 
-**cyim 穿越中文输入法 Emacs 版本**
+**穿越中文输入法 Emacs 版本**
 
 版本： 0.9
 
@@ -67,14 +68,18 @@ TODO： 加入编程词汇表。
 
 <http://vim.baow.com/cyim/data/20121015181207/index.html>
 
-# Linux Fcitx 版本<a id="sec-2"></a>
+# Android 手机<a id="sec-2"></a>
+
+先安装Termux和黑客键盘（Hacker’s Keyboard），再安装Emacs，再按照上边的方法配置。
+
+# Linux Fcitx 版本<a id="sec-3"></a>
 
 请把 fcitx/table 中的文件， 复制到主目录中的 .config/fcitx/table 中。可能需要重启fcitx，然后选择穿越中文输入法。
 
-# Vim 版本<a id="sec-3"></a>
+# Vim 版本<a id="sec-4"></a>
 
 见 <http://vim.baow.com/cyim>
 
-# Windows 版本<a id="sec-4"></a>
+# Windows 版本<a id="sec-5"></a>
 
 请从 <http://ddeb.ys168.com/> 安装兼容的奔腾输入法。
