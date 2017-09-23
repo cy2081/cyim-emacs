@@ -2,7 +2,6 @@
 - [Android 手机](#sec-2)
 - [Linux Fcitx 版本](#sec-3)
 - [Vim 版本](#sec-4)
-- [Windows 版本](#sec-5)
 
 **穿越中文输入法 Emacs 版本**
 
@@ -79,7 +78,3 @@ TODO： 加入编程词汇表。
 # Vim 版本<a id="sec-4"></a>
 
 见 <http://vim.baow.com/cyim>
-
-# Windows 版本<a id="sec-5"></a>
-
-请从 <http://ddeb.ys168.com/> 安装兼容的奔腾输入法。

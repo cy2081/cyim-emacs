@@ -74,6 +74,3 @@ http://vim.baow.com/cyim/data/20121015181207/index.html
 
 见 http://vim.baow.com/cyim
 
-* Windows 版本
-
-请从 http://ddeb.ys168.com/ 安装兼容的奔腾输入法。
