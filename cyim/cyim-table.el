@@ -48,7 +48,7 @@
                         (lambda (c)
                           (format "%d.%s " (setq i (1+ i))
                                   (if (consp c)
-                                      (concat (car c) (cdr c))
+                                      (concat (car c) " " (cdr c))
                                     c)))
                         choice) " "))))
 
