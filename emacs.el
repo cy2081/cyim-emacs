@@ -27,5 +27,8 @@
 ;; 设置中英文标点切换快捷键
 (global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
 
+;; 取消当前输入，并切换到英文
+(global-set-key (kbd "C-g") 'cyim-clear-toggle)
+
 ;; 设置为默认输入法
 (setq default-input-method 'cyim)

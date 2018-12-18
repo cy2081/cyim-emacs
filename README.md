@@ -55,6 +55,9 @@
 ;; 设置中英文标点切换快捷键
 (global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
 
+;; 取消当前输入，并切换到英文
+(global-set-key (kbd "C-g") 'cyim-clear-toggle)
+
 ;; 设置为默认输入法
 (setq default-input-method 'cyim)
 
@@ -64,11 +67,11 @@
 
 ## 快捷键
 
-`M-SPC`  切换输入法
+`M-SPC` 切换输入法
 
-`C-,`  切换中英文标点
+`C-,` 切换中英文标点
 
-`C-;`  输入英文
+`C-;` 输入英文
 
 `C-n` 选项下一页
 
@@ -76,9 +79,11 @@
 
 `C-m` 输入字母
 
-`C-c` 或 `C-g` 取消输入
+`C-c` 取消输入
 
-`SPC`  选择第一项
+`C-g` 取消当前输入，并切换到英文
+
+`SPC` 选择第一项
 
 `[`  选择第二项
 

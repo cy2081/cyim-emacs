@@ -117,7 +117,6 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
     (define-key map "\C-p" 'cyim-previous-page)
     (define-key map "\C-m" 'cyim-quit-no-clear)
     (define-key map "\C-c" 'cyim-quit-clear)
-    (define-key map "\C-g" 'cyim-quit-clear)
     map)
   "Keymap")
 
