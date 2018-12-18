@@ -2,7 +2,7 @@
 # 穿越中文输入法 Emacs 版
 
 - [设置和安装](#sec-1)
-- [Android 手机](#sec-2)
+- [Android 手机版](#sec-2)
 - [Linux Fcitx 版](#sec-3)
 - [Vim 版](#sec-4)
 - [感谢](#sec-5)
@@ -24,7 +24,7 @@
 
 # 设置和安装<a id="sec-1"></a>
 
-安装方法是先把 cyim 放到 .emacs.d 目录中，然后把以下代码加入到 .emacs 文件中：
+安装方法是先把 cyim 目录放到 .emacs.d 中，然后把以下代码加入到 .emacs 文件中：
 
 ```emacs-lisp
 ;; 添加到 load-path
@@ -99,7 +99,7 @@
 直接编辑 cy-table.txt 即可。
 
 
-# Android 手机<a id="sec-2"></a>
+# Android 手机版<a id="sec-2"></a>
 
 先安装Termux和黑客键盘（Hacker’s Keyboard），再安装Emacs，再按照上边的方法配置。
 
