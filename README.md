@@ -33,7 +33,7 @@
 (register-input-method "cyim" "euc-cn" 'cyim-use-package
                        "穿越" "穿越中文输入法" "cy-table.txt")
 
-(add-hook 'cyim-wb-load-hook
+(add-hook 'cyim-cy-load-hook
           (lambda ()
             (let ((map (cyim-mode-map)))
               (define-key map [return] 'cyim-select-current))))
