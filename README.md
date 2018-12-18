@@ -2,70 +2,94 @@
 - [Android 手机](#sec-2)
 - [Linux Fcitx 版本](#sec-3)
 - [Vim 版本](#sec-4)
+- [感谢](#sec-5)
 
 **穿越中文输入法 Emacs 版本**
 
-版本： 0.9
+版本： 1.0
 
 作者： cy@baow.com
 
 穿越中文输入法是一种简单易学输入快速的汉字输入方法，目标是成为软件编程人员易于使用的中文输入法。
 
-中文编码： <http://vim.baow.com/cyim/data/20121015181207/index.html>
+中文编码方法见 docs 目录中的 [chinese-cy.html](docs/chinese-cy.html)
 
 # Emacs 版本<a id="sec-1"></a>
 
-这是在Emacs中使用的中文输入法，主要程序是从 <https://github.com/zilongshanren/chinese-wbim> 移植过来的，基本设置和chinese-wbim一样，改进部分如下：
+这是在Emacs中使用的中文输入法，输入中文比较快捷方便。特点有：
 
--   码表文件采用了Vim版本中的码表cy.txt，具体汉字编码方式参见： <http://vim.baow.com/cyim>
--   实现了4个字母对应一个单词时，自动上屏。
--   大写英文字母自动切换到英文模式
+ - 遇到空格和大写字母自动切换到英文输入
+ - 实现了4个字母对应一个单词时，自动上屏。
 
-TODO： 加入编程词汇表。
-
-设置方法是先把 chinese-wbim 放到 .emacs.d 目录中，然后把以下代码加入到 .emacs 文件中
+安装方法是先把 cyim 放到 .emacs.d 目录中，然后把以下代码加入到 .emacs 文件中：
 
 ```emacs-lisp
-
 ;; 添加到 load-path
-(setq load-path (cons (file-truename "~/.emacs.d/chinese-wbim") load-path))
+(setq load-path (cons (file-truename "~/.emacs.d/cyim") load-path))
 
-(autoload 'chinese-wbim-use-package "chinese-wubi" "Another emacs input method")
+(autoload 'cyim-use-package "cyim" "CY input method")
+(register-input-method "cyim" "euc-cn" 'cyim-use-package
+                       "穿越" "穿越中文输入法" "cy-table.txt")
 
-;; Tooptip is not good enough, so disable it here.
-(setq chinese-wbim-use-tooltip nil)
+(add-hook 'cyim-wb-load-hook
+          (lambda ()
+            (let ((map (cyim-mode-map)))
+              (define-key map [return] 'cyim-select-current))))
 
-(register-input-method
- "chinese-wubi" "euc-cn" 'chinese-wbim-use-package
- "穿越" "穿越中文输入法" "cy.txt")
+(require 'cyim-extra)
 
-(require 'chinese-wbim-extra)
+;; 打开光标跟随移动提示
+(setq cyim-use-tooltip t)
 
-;; 用 ; 暂时输入英文
-(global-set-key ";" 'chinese-wbim-insert-ascii)
+;; 打开输入空格时自动切换到英文状态
+(setq cyim-quick-en t)
 
-;; 英文大写字母自动切换到英文
-(let ((i 65))
-   (while (< i 91)
-      (global-set-key (char-to-string i) 'chinese-cy-insert-en)
-      (setq i (1+ i))))
+;; 设置英文切换快捷键
+(global-set-key (kbd "C-;") 'cyim-insert-ascii)
 
-;; 设置默认输入法
-(setq default-input-method 'chinese-wubi)
-
-;; 设置输入法开关 
+;; 设置中英文切换快捷键
 (global-set-key (kbd "M-SPC") 'toggle-input-method)
 
-;; 设置英文标点切换
-(global-set-key (kbd "C-,") 'chinese-wbim-punc-translate-toggle)
+;; 设置中英文标点切换快捷键
+(global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
+
+;; 设置为默认输入法
+(setq default-input-method 'cyim)
 
 ```
 
 如果使用Spacemacs，基本方式类似。
 
-汉字的编码方案请参见Vim版中的说明：
+## 快捷键
 
-<http://vim.baow.com/cyim/data/20121015181207/index.html>
+M-SPC  切换输入法
+
+C-,  切换中英文标点
+
+C-;  输入英文
+
+C-n 选项下一页
+
+C-p 选项上一页
+
+C-m 输入字母
+
+C-c 或 C-g 取消输入
+
+SPC  选择第一项
+
+[  选择第二项
+
+‘  选择第三项
+
+## 自定义词库
+
+把 mycy.txt 文件复制到 .emacs.d 目录下，直接编辑即可。
+
+## 词库管理
+
+直接编辑 cy-table.txt 即可。
+
 
 # Android 手机<a id="sec-2"></a>
 
@@ -78,3 +102,7 @@ TODO： 加入编程词汇表。
 # Vim 版本<a id="sec-4"></a>
 
 见 <http://vim.baow.com/cyim>
+
+# 感谢<a id="sec-5"></a>
+
+感谢众多开演软件作者，谢谢大家的支持和努力。
