@@ -1,25 +1,27 @@
-- [Emacs 版本](#sec-1)
-- [Android 手机](#sec-2)
-- [Linux Fcitx 版本](#sec-3)
-- [Vim 版本](#sec-4)
-- [感谢](#sec-5)
 
-**穿越中文输入法 Emacs 版本**
+# 穿越中文输入法 Emacs 版
+
+- [设置和安装](#sec-1)
+- [Android 手机](#sec-2)
+- [Linux Fcitx 版](#sec-3)
+- [Vim 版](#sec-4)
+- [感谢](#sec-5)
 
 版本： 1.0
 
 作者： cy@baow.com
 
+
 穿越中文输入法是一种简单易学输入快速的汉字输入方法，目标是成为软件编程人员易于使用的中文输入法。
-
-中文编码方法见 docs 目录中的 [chinese-cy.html](docs/chinese-cy.html)
-
-# Emacs 版本<a id="sec-1"></a>
 
 这是在Emacs中使用的中文输入法，输入中文比较快捷方便。特点有：
 
  - 遇到空格和大写字母自动切换到英文输入
  - 实现了4个字母对应一个单词时，自动上屏。
+
+中文编码方法见 docs 目录中的 [chinese-cy.html](docs/chinese-cy.html)
+
+# 设置和安装<a id="sec-1"></a>
 
 安装方法是先把 cyim 放到 .emacs.d 目录中，然后把以下代码加入到 .emacs 文件中：
 
@@ -58,7 +60,7 @@
 
 ```
 
-如果使用Spacemacs，基本方式类似。
+如果使用 Spacemacs，基本方式类似。
 
 ## 快捷键
 
@@ -95,11 +97,11 @@ SPC  选择第一项
 
 先安装Termux和黑客键盘（Hacker’s Keyboard），再安装Emacs，再按照上边的方法配置。
 
-# Linux Fcitx 版本<a id="sec-3"></a>
+# Linux Fcitx 版<a id="sec-3"></a>
 
 请把 fcitx/table 中的文件， 复制到主目录中的 .config/fcitx/table 中。可能需要重启fcitx，然后选择穿越中文输入法。
 
-# Vim 版本<a id="sec-4"></a>
+# Vim 版<a id="sec-4"></a>
 
 见 <http://vim.baow.com/cyim>
 
