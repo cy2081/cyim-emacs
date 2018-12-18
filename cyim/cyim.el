@@ -8,7 +8,7 @@
   (require 'cl))
 (require 'help-mode)
 
-(defvar cyim-version "2.4")
+(defvar cyim-version "1.0")
 
 ;;;_. emacs21 compatible
 (when (not (fboundp 'number-sequence))
