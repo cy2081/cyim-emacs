@@ -104,6 +104,15 @@ If you don't like this funciton, set the variable to nil")
         (call-interactively 'toggle-input-method))
     (call-interactively 'self-insert-command)))
 
+;; Evil 中，在 normal 状态下关闭输入法
+(defun cyim-evil-normal-toggle ()
+  (interactive)
+  (call-interactively 'evil-insert)
+  (if current-input-method
+      (progn
+        (call-interactively 'toggle-input-method)))
+  (call-interactively 'evil-force-normal-state))
+
 ;; 取消当前输入，并切换到英文
 (defun cyim-clear-toggle ()
   (interactive)
