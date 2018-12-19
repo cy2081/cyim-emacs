@@ -18,6 +18,12 @@ If you don't like this funciton, set the variable to nil")
 (defvar cyim-punc-translate-p t
   "*Non-nil means will translate punctuation.")
 
+(defvar lispy-left "[([{]"
+  "Opening delimiter.")
+
+(defvar lispy-right "[])}]"
+  "Closing delimiter.")
+
 ;;;_. handle punctuation
 (defun cyim-read-punctuation (package)
   (let ((cyim-current-package package)
@@ -112,6 +118,18 @@ If you don't like this funciton, set the variable to nil")
       (progn
         (call-interactively 'toggle-input-method)))
   (call-interactively 'evil-force-normal-state))
+
+(defun cyim-evil-insert-toggle ()
+  (interactive)
+  (when (looking-at lispy-left)
+    (if current-input-method
+        (progn
+          (call-interactively 'toggle-input-method))))
+  (when (looking-back lispy-right
+                      (line-beginning-position))
+    (if current-input-method
+        (progn
+          (call-interactively 'toggle-input-method)))))
 
 ;; 取消当前输入，并切换到英文
 (defun cyim-clear-toggle ()

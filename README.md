@@ -8,15 +8,20 @@
 
 Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷方便。除了具有基本的功能外，主要特点有：
 
- - 完善中英文切换方式，输入更为流畅。
+ - 完善的中文编码，重码率低。
+ - 中英文切换方便，输入更为流畅。
  - 遇到空格和大写字母自动切换到英文输入。
+ - 支持遇到括号时自动切换到英文输入。
  - 实现了4个字母对应一个单词时，自动上屏。
+ - 方便进行自定义。
  
 **目录：** 
 
  - [1. 中文编码](#sec-0)
  - [2. 安装](#sec-1)
  - [3. 设置](#sec-2)
+     - [3.1 普通设置](#sec-21)
+     - [3.2 Spacemacs 设置](#sec-22)
  - [4. 快捷键](#sec-3)
  - [5. 词库](#sec-4)
  - [6. 其它版本](#sec-5)
@@ -31,32 +36,44 @@ Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷�
 
 ## 2. 安装<a id="sec-1"></a>
 
-默认使用 Linux 系统，安装方法是先把 `cyim` 目录放到 `.emacs.d` 中，然后按照下边进行设置。
+默认使用 Linux 系统。
+
+```bash
+git clone https://github.com/cy2081/cyim-emacs.git
+
+```
 
 ## 3. 设置<a id="sec-2"></a>
+## 3.1 普通设置<a id="sec-21"></a>
+
+先把 `local/cyim` 目录放到 `.emacs.d` 中，然后按照下边进行设置。
 
 复制 `emacs.el` 中的代码，加入到 Emacs 的启动文件 `.emacs` 中，或直接添加下面的代码：
 
 ```emacs-lisp
 ;; 添加到 load-path
-(setq load-path (cons (file-truename "~/.emacs.d/cyim") load-path))
+(setq load-path (cons (file-truename "~/.emacs.d/local/cyim") load-path))
 
 (autoload 'cyim-use-package "cyim" "CY input method")
 (register-input-method "cyim" "euc-cn" 'cyim-use-package
                        "穿越" "穿越中文输入法" "cy-table.txt")
 
-(add-hook 'cyim-cy-load-hook
-          (lambda ()
-            (let ((map (cyim-mode-map)))
-              (define-key map [return] 'cyim-select-current))))
+;; 设置 return 选择第一项
+;; (add-hook 'cyim-cy-load-hook
+;;           (lambda ()
+;;             (let ((map (cyim-mode-map)))
+;;               (define-key map [return] 'cyim-select-current))))
 
 (require 'cyim-extra)
 
-;; 打开光标跟随移动提示
-(setq cyim-use-tooltip t)
+;; 设置光标跟随移动提示， t 或 nil
+(setq cyim-use-tooltip nil)
 
 ;; 打开输入空格时自动切换到英文状态
 (setq cyim-quick-en t)
+
+;; 设置当前显示第一项
+(setq cyim-show-first nil)
 
 ;; 设置英文切换快捷键
 (global-set-key (kbd "C-;") 'cyim-insert-ascii)
@@ -73,9 +90,20 @@ Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷�
 ;; 设置为默认输入法
 (setq default-input-method 'cyim)
 
+;; 使用 Evil 的 hybrid 模式时，遇到括号自动切换英文
+;; (add-hook 'evil-hybrid-state-entry-hook 'cyim-evil-insert-toggle)
 ```
 
-如果使用 Spacemacs，基本方式类似。
+## 3.2 Spacemacs 设置<a id="sec-22"></a>
+
+如果使用 Spacemacs，可以直接把 `cyim-emacs` 当作一个新 layer 添加到 `~/.emacs.d/private` 中，配置文件 `config.el` 和 `packages.el` 已经建好。
+
+然后在 `.spacemacs` 的 `dotspacemacs-configuration-layer` 中加入：
+
+```emacs-lisp
+(cyim-emacs :variables chinese-default-input-method 'cyim)` 
+```
+具体配置参见 `packages.el` 。
 
 ## 4. 快捷键<a id="sec-3"></a>
 

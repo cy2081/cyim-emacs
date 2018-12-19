@@ -95,6 +95,9 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
 (defvar cyim-quick-en t
   "默认打开快速英文切换功能")
 
+(defvar cyim-show-first t
+  "默认打开快速英文切换功能")
+
 (defvar cyim-mode-map          ; ## map
   (let ((map (make-sparse-keymap))
         (i ?\ ))
@@ -715,8 +718,9 @@ beginning of line"
     (error "Can't input characters in current unibyte buffer"))
   (cyim-delete-region)
 
-  ; cy: 显示当前选择词条
-  ;; (insert cyim-current-str)
+  ;; 显示当前选择词条
+  (when cyim-show-first
+    (insert cyim-current-str))
 
   (if (eq (selected-window) (minibuffer-window))
       (insert cyim-current-str))
