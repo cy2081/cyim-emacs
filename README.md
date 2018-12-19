@@ -4,9 +4,9 @@
 
 作者： cy@baow.com
 
-穿越中文输入法是一种简单易学输入快速的汉字输入方法，目标是成为软件编程人员易于使用的中文输入法。
+穿越中文输入法（cyim）是一种简单易学输入快速的汉字输入方法，目标是成为软件编程人员易于使用的中文输入法。
 
-这是在 Emacs 中使用的中文输入法，输入中文比较快捷方便。除了具有基本的功能外，主要特点有：
+cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷方便。除了具有基本的功能外，主要特点有：
 
  - 完善中英文切换方式，输入更为流畅。
  - 遇到空格和大写字母自动切换到英文输入。
@@ -27,11 +27,11 @@
 
 ## 1. 中文编码<a id="sec-0"></a>
 
-中文编码方法见 docs 文档目录中的 [chinese-cy.html](docs/chinese-cy.html)
+中文编码方法见 `docs` 文档目录中的 [chinese-cy.html](docs/chinese-cy.html)
 
 ## 2. 安装<a id="sec-1"></a>
 
-默认使用 Linux 系统，安装方法是先把 cyim 目录放到 .emacs.d 中，然后把以下边的设置代码。
+默认使用 Linux 系统，安装方法是先把 `cyim` 目录放到 `.emacs.d` 中，然后把以下边的设置代码。
 
 ## 3. 设置<a id="sec-2"></a>
 
@@ -104,20 +104,20 @@
 ## 5. 词库<a id="sec-4"></a>
 ### 5.1 默认词库
 
-直接编辑 cy-table.txt 即可。
+直接编辑 `cy-table.txt` 即可。
 
 ### 5.2 自定义词库
 
-把 mycy.txt 文件复制到 .emacs.d 目录下，直接编辑即可。
+把 `mycy.txt` 文件复制到 `.emacs.d` 目录下，直接编辑即可。
 
 ## 6. 其它版本<a id="sec-5"></a>
 ### 6.1 Android 手机版<a id="sec-51"></a>
 
-先安装 Termux 和黑客键盘（Hacker’s Keyboard），再安装 Emacs，再按照上边的方法配置。
+先安装 `Termux` 和黑客键盘（Hacker’s Keyboard），再安装 Emacs，再按照上边的方法配置。
 
 ### 6.2 Linux Fcitx 版<a id="sec-52"></a>
 
-请把 `fcitx/table 中的文件`， 复制到主目录中的 `.config/fcitx/table` 中。可能需要重启fcitx，然后选择穿越中文输入法。
+请把 `fcitx/table 中的文件`， 复制到主目录中的 `.config/fcitx/table` 中。可能需要重启 fcitx 输入法，然后选择穿越中文输入法。
 
 ### 6.3 Vim 版<a id="sec-53"></a>
 
