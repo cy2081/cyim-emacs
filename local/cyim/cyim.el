@@ -98,6 +98,9 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
 (defvar cyim-show-first t
   "默认打开快速英文切换功能")
 
+(defvar cyim-current-length 0
+  "当前选择的词条字数")
+
 (defvar cyim-mode-map          ; ## map
   (let ((map (make-sparse-keymap))
         (i ?\ ))
@@ -579,6 +582,10 @@ beginning of line"
   (interactive "p")
   (cyim-next-page (- arg)))
 
+(defun cyim-delete-last-word ()
+  (interactive)
+  (delete-backward-char cyim-current-length))
+
 (defun cyim-delete-last-char ()
   (interactive)
   (if (> (length cyim-current-key) 1)
@@ -717,6 +724,9 @@ beginning of line"
           cyim-current-str nil)
     (error "Can't input characters in current unibyte buffer"))
   (cyim-delete-region)
+
+  (setq cyim-current-length
+        (length cyim-current-str))
 
   ;; 显示当前选择词条
   (when cyim-show-first

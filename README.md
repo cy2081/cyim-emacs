@@ -87,6 +87,9 @@ git clone https://github.com/cy2081/cyim-emacs.git
 ;; 取消当前输入，并切换到英文
 (global-set-key (kbd "C-g") 'cyim-clear-toggle)
 
+;; 删除已经输入的单词
+(global-set-key (kbd "M-u") 'cyim-delete-last-word)
+
 ;; 设置为默认输入法
 (setq default-input-method 'cyim)
 
@@ -122,6 +125,8 @@ git clone https://github.com/cy2081/cyim-emacs.git
 `C-c` 取消输入
 
 `C-g` 取消当前输入，并切换到英文
+
+`M-u` 删除已经输入的单词
 
 `SPC` 选择第一项
 
