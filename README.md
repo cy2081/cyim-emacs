@@ -31,11 +31,11 @@ Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷�
 
 ## 2. 安装<a id="sec-1"></a>
 
-默认使用 Linux 系统，安装方法是先把 `cyim` 目录放到 `.emacs.d` 中，然后把以下边的设置代码。
+默认使用 Linux 系统，安装方法是先把 `cyim` 目录放到 `.emacs.d` 中，然后按照下边进行设置。
 
 ## 3. 设置<a id="sec-2"></a>
 
-复制 `emacs.el` 中的代码加入到 Emacs 的启动文件 `.emacs` 中，或直接添加下面的代码：
+复制 `emacs.el` 中的代码，加入到 Emacs 的启动文件 `.emacs` 中，或直接添加下面的代码：
 
 ```emacs-lisp
 ;; 添加到 load-path
