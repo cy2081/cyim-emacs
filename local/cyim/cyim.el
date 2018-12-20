@@ -118,7 +118,7 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
     (define-key map " " 'cyim-select-current)
     (define-key map [backspace] 'cyim-delete-last-char)
     (define-key map [delete] 'cyim-delete-last-char)
-    (define-key map "\177" 'cyim-delete-last-char)
+    (define-key map "\C-z" 'cyim-delete-last-char)
     (define-key map "\C-n" 'cyim-next-page)
     (define-key map "\C-p" 'cyim-previous-page)
     (define-key map "\C-m" 'cyim-quit-no-clear)

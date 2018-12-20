@@ -128,6 +128,8 @@ git clone https://github.com/cy2081/cyim-emacs.git
 
 `M-u` 删除已经输入的单词
 
+`C-z` 删除选项中前一个字母
+
 `SPC` 选择第一项
 
 `[`  选择第二项
