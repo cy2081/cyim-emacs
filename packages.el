@@ -34,14 +34,11 @@
       ;; 设置英文切换快捷键
       (global-set-key (kbd "C-;") 'cyim-insert-ascii)
 
-      ;; 设置中英文切换快捷键
-      (global-set-key (kbd "M-SPC") 'toggle-input-method)
+      ;; 设置中英文切换快捷键， linux 中就是 Alt + Space
+      (global-set-key (kbd "M-SPC") 'cyim-toggle)
 
       ;; 设置中英文标点切换快捷键
       (global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
-
-      ;; 取消当前输入，并切换到英文
-      (global-set-key (kbd "C-g") 'cyim-clear-toggle)
 
       ;; 删除已经输入的单词
       (global-set-key (kbd "M-u") 'cyim-delete-last-word)

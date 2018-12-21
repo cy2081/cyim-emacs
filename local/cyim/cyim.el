@@ -101,7 +101,7 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
 (defvar cyim-current-length 0
   "当前选择的词条字数")
 
-(defvar cyim-mode-map          ; ## map
+(defvar cyim-mode-map                   ; ## map
   (let ((map (make-sparse-keymap))
         (i ?\ ))
     (while (< i 127)
@@ -114,7 +114,7 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
     (dolist (i (number-sequence ?1 ?9))
       (define-key map (char-to-string i) 'cyim-number-select))
     (dolist (i (number-sequence ?A ?Z))
-      (define-key map (char-to-string i) 'cyim-toggle))
+      (define-key map (char-to-string i) 'cyim-en-toggle))
     (define-key map " " 'cyim-select-current)
     (define-key map [backspace] 'cyim-delete-last-char)
     (define-key map [delete] 'cyim-delete-last-char)
@@ -123,6 +123,8 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
     (define-key map "\C-p" 'cyim-previous-page)
     (define-key map "\C-m" 'cyim-quit-no-clear)
     (define-key map "\C-c" 'cyim-quit-clear)
+    (define-key map (kbd "M-SPC") 'cyim-clear-toggle)
+    (define-key map (kbd "C-g") 'cyim-clear-toggle)
     map)
   "Keymap")
 

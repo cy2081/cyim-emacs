@@ -18,10 +18,10 @@ If you don't like this funciton, set the variable to nil")
 (defvar cyim-punc-translate-p t
   "*Non-nil means will translate punctuation.")
 
-(defvar lispy-left "[([{]"
+(defvar cyim-lispy-left "[([{]"
   "Opening delimiter.")
 
-(defvar lispy-right "[])}]"
+(defvar cyim-lispy-right "[])}]"
   "Closing delimiter.")
 
 ;;;_. handle punctuation
@@ -86,8 +86,8 @@ If you don't like this funciton, set the variable to nil")
                (insert (read-from-minibuffer "英文：")))))
     (call-interactively 'self-insert-command)))
 
-;; 切换到英文状态时，先显示第一个字母
 (defun cyim-insert-ascii-first ()
+  "切换到英文状态时，先显示第一个字母"
   (interactive)
   (if current-input-method
       (let (c)
@@ -101,8 +101,8 @@ If you don't like this funciton, set the variable to nil")
                (insert (read-from-minibuffer (concat "英文：" (char-to-string last-command-event)))))))
     (call-interactively 'self-insert-command)))
 
-;; 切换输入法
-(defun cyim-toggle ()
+(defun cyim-en-toggle ()
+  "用于输入大写字母时切换输入法"
   (interactive)
   (if current-input-method
       (progn
@@ -110,8 +110,15 @@ If you don't like this funciton, set the variable to nil")
         (call-interactively 'toggle-input-method))
     (call-interactively 'self-insert-command)))
 
-;; Evil 中，在 normal 状态下关闭输入法
+(defun cyim-toggle ()
+  "切换输入法"
+  (interactive)
+  (if current-input-method
+      (cyim-quit-clear))
+  (toggle-input-method))
+
 (defun cyim-evil-normal-toggle ()
+  "Evil 中，在 normal 状态下关闭输入法"
   (interactive)
   (call-interactively 'evil-insert)
   (if current-input-method
@@ -121,11 +128,11 @@ If you don't like this funciton, set the variable to nil")
 
 (defun cyim-evil-insert-toggle ()
   (interactive)
-  (when (looking-at lispy-left)
+  (when (looking-at cyim-lispy-left)
     (if current-input-method
         (progn
           (call-interactively 'toggle-input-method))))
-  (when (looking-back lispy-right
+  (when (looking-back cyim-lispy-right
                       (line-beginning-position))
     (if current-input-method
         (progn
