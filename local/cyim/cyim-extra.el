@@ -138,13 +138,6 @@ If you don't like this funciton, set the variable to nil")
         (progn
           (call-interactively 'toggle-input-method)))))
 
-;; 取消当前输入，并切换到英文
-(defun cyim-clear-toggle ()
-  (interactive)
-  (cyim-quit-clear)
-  (when current-input-method
-    (call-interactively 'toggle-input-method)))
-
 ;;;_. load and save history
 (defun cyim-load-history (history-file package)
   (let* ((cyim-current-package package)
