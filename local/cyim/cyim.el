@@ -455,8 +455,6 @@ beginning of line"
   (setq input-method-function 'cyim-input-method)
   (setq inactivate-current-input-method-function 'cyim-inactivate)
   (setq describe-current-input-method-function 'cyim-help)
-  ;; If we are in minibuffer, turn off the current input method
-  ;; before exiting.
   (when (eq (selected-window) (minibuffer-window))
     (add-hook 'minibuffer-exit-hook 'cyim-exit-from-minibuffer))
   (run-hooks 'cyim-active-hook)
@@ -700,11 +698,10 @@ beginning of line"
       (funcall cyim-translate-function char)
     (char-to-string char)))
 
-;;;_ , Core function of input method (stole from quail)
 (defun cyim-exit-from-minibuffer ()
-  (inactivate-input-method)
+  (deactivate-input-method)
   (if (<= (minibuffer-depth) 1)
-      (remove-hook 'minibuffer-exit-hook 'quail-exit-from-minibuffer)))
+      (remove-hook 'minibuffer-exit-hook 'cyim-exit-from-minibuffer)))
 
 (defun cyim-setup-overlays ()
   (let ((pos (point)))
@@ -761,7 +758,7 @@ beginning of line"
           (message "%s" cyim-guidance-str))))))
 
 (defun cyim-make-guidance-frame ()
-  "Make a new one-line frame for Quail guidance."
+  "Make a new one-line frame for guidance."
   (let* ((fparam (frame-parameters))
          (top (cdr (assq 'top fparam)))
          (border (cdr (assq 'border-width fparam)))
@@ -816,7 +813,7 @@ beginning of line"
         (run-hooks 'input-method-after-insert-chunk-hook)))))
 
 (defun cyim-start-translation (key)
-  "Start translation of the typed character KEY by the current Quail package.
+  "Start translation of the typed character KEY by the current package.
 Return the input string."
   ;; Check the possibility of translating KEY.
   ;; If KEY is nil, we can anyway start translation.

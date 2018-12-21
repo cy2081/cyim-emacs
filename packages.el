@@ -52,6 +52,9 @@
       ;; hybrid 模式时，遇到括号自动切换英文
       (add-hook 'evil-hybrid-state-entry-hook 'cyim-evil-insert-toggle)
 
+      ;; minibuffer 中输入时关闭中文输入法
+      (add-hook 'minibuffer-setup-hook 'deactivate-input-method)
+
       ;; emacs-lisp 配合 lispyville 时，自动切换英文
       (add-hook 'emacs-lisp-mode-hook
                 (lambda ()
