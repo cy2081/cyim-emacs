@@ -22,11 +22,11 @@
 ;; 设置当前显示第一项
 (setq cyim-show-first nil)
 
-;; 设置英文切换快捷键
-(global-set-key (kbd "C-;") 'cyim-insert-ascii)
-
 ;; 设置中英文切换快捷键， linux 中就是 Alt + Space
 (global-set-key (kbd "M-SPC") 'toggle-input-method)
+
+;; 设置临时输入英文快捷键
+(global-set-key (kbd "C-;") 'cyim-insert-ascii)
 
 ;; 设置中英文标点切换快捷键
 (global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
