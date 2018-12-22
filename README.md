@@ -52,7 +52,7 @@ git clone https://github.com/cy2081/cyim-emacs.git
 
 ```emacs-lisp
 ;; 添加到 load-path
-(setq load-path (cons (file-truename "~/.emacs.d/local/cyim") load-path))
+(push "~/.emacs.d/local/cyim" load-path)
 
 (autoload 'cyim-use-package "cyim" "CY input method")
 (register-input-method "cyim" "euc-cn" 'cyim-use-package
