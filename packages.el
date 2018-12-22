@@ -8,7 +8,6 @@
     :if (eq 'cyim chinese-default-input-method)
     :init
     (progn
-
       (autoload 'cyim-use-package "cyim" "CY input method")
       (register-input-method "cyim" "euc-cn" 'cyim-use-package
                              "穿越" "穿越中文输入法" "cy-table.txt")
@@ -20,7 +19,6 @@
       ;;           (lambda ()
       ;;             (let ((map (cyim-mode-map)))
       ;;               (define-key map [return] 'cyim-select-current))))
-
 
       ;; 设置光标跟随移动提示， t 或 nil
       (setq cyim-use-tooltip nil)
@@ -62,5 +60,4 @@
       (add-hook 'scheme-mode-hook
                 (lambda ()
                   (when (and (boundp lispyville-mode) lispyville-mode)
-                    (add-hook 'activate-mark-hook #'cyim-evil-normal-toggle :local t))
-                  )))))
+                    (add-hook 'activate-mark-hook #'cyim-evil-normal-toggle :local t)))))))
