@@ -33,7 +33,7 @@
       (global-set-key (kbd "M-SPC") 'cyim-toggle)
 
       ;; 设置临时输入英文快捷键
-      (global-set-key (kbd "C-;") 'cyim-insert-ascii)
+      (global-set-key (kbd "C-M-;") 'cyim-insert-ascii)
 
       ;; 设置中英文标点切换快捷键
       (global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
