@@ -275,9 +275,10 @@ OTHER-PROPERTIES 是一些其它的属性，比如，上次的位置，用来输
 
 (defsubst cyim-delete-region ()
   "Delete the text in the current translation region of E+."
-  (if (overlay-start cyim-overlay)
-      (delete-region (overlay-start cyim-overlay)
-                     (overlay-end cyim-overlay))))
+  (when cyim-overlay          ; ## todo check
+    (if (overlay-start cyim-overlay)
+        (delete-region (overlay-start cyim-overlay)
+                       (overlay-end cyim-overlay)))))
 
 ;;; steal from emms-compat.el. Is this a good idea?
 (when (not (fboundp 'emms-delete-if))
@@ -610,7 +611,7 @@ beginning of line"
         (when (= (length cyim-current-key) 4)
           (when (= 1 (length (car cyim-current-choices)))
             (cyim-terminate-translation))
-          ;; 没有词是只显示key
+          ;; 没有词时只显示key
           (when (string= cyim-current-str cyim-current-key)
             (setq cyim-current-str "")
             ;; (cyim-terminate-translation)
