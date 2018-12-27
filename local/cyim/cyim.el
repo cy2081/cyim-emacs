@@ -101,7 +101,7 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
 (defvar cyim-current-length 0
   "当前选择的词条字数")
 
-(defvar cyim-mode-map                   ; ## map
+(defvar cyim-mode-map
   (let ((map (make-sparse-keymap))
         (i ?\ ))
     (while (< i 127)
