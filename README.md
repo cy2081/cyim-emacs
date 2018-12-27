@@ -111,7 +111,7 @@ git clone https://github.com/cy2081/cyim-emacs.git
 
 `C-,` 切换中英文标点
 
-`C-;` 输入英文
+`C-M-;` 输入英文
 
 `C-n` 选项下一页
 
