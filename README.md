@@ -2,7 +2,7 @@
 
 版本： 1.0
 
-作者： cy@baow.com
+作者： 1829233719@qq.com
 
 穿越中文输入法（Cyim）是一种简单易学输入快速的汉字输入方法，目标是成为软件编程人员易于使用的中文输入法。
 
@@ -153,7 +153,7 @@ git clone https://github.com/cy2081/cyim-emacs.git
 
 ### 6.3 Vim 版<a id="sec-53"></a>
 
-详见 <http://vim.baow.com/cyim>
+详见 <https://cy2081.github.io/cyim>
 
 ## 7. 感谢<a id="sec-6"></a>
 
