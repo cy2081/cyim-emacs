@@ -153,7 +153,7 @@ git clone https://github.com/cy2081/cyim-emacs.git
 
 ### 6.3 Vim 版<a id="sec-53"></a>
 
-详见 <https://cy2081.github.io/cyim>
+详见 <https://github.com/cy2081/vim-cyim>
 
 ## 7. 感谢<a id="sec-6"></a>
 
