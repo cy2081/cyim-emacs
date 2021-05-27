@@ -1,9 +1,3 @@
-;;; cyim-extra.el
-
-;;; Commentary:
-
-;;; Code:
-
 (eval-when-compile
   (require 'cl))
 (require 'cyim)
@@ -114,8 +108,18 @@ If you don't like this funciton, set the variable to nil")
   "切换输入法"
   (interactive)
   (if current-input-method
-      (cyim-quit-clear))
+      (progn
+        (cyim-quit-clear))
+    (setq cyim-quick-en-on nil))
   (toggle-input-method))
+
+(defun cyim-quick-en-space-off ()
+  "关闭快速英文状态"
+  (interactive)
+  (insert " ")
+  (when cyim-quick-en-on
+    (toggle-input-method)
+    (setq cyim-quick-en-on nil)))
 
 (defun cyim-evil-normal-toggle ()
   "Evil 中，在 normal 状态下关闭输入法"
@@ -126,7 +130,7 @@ If you don't like this funciton, set the variable to nil")
         (call-interactively 'toggle-input-method)))
   (call-interactively 'evil-force-normal-state))
 
-(defun cyim-evil-insert-toggle ()
+(defun cyim-evil-insert-entry-toggle ()
   (interactive)
   (when (looking-at cyim-lispy-left)
     (if current-input-method
@@ -236,4 +240,3 @@ If you don't like this funciton, set the variable to nil")
   (symbol-value (intern-soft (char-to-string char) table)))
 
 (provide 'cyim-extra)
-;;; cyim-extra.el ends here
