@@ -30,7 +30,7 @@
   (global-set-key (kbd "C-e") 'cyim-insert-ascii)
 
   ;; 设置中英文标点切换快捷键
-  (global-set-key (kbd "C-'") 'cyim-punc-translate-toggle)
+  (global-set-key (kbd "C-,") 'cyim-punc-translate-toggle)
 
   ;; 删除已经输入的单词
   (global-set-key (kbd "M-u") 'cyim-delete-last-word)
