@@ -8,7 +8,7 @@
   (require 'cl))
 (require 'help-mode)
 
-(defvar cyim-version "1.0")
+(defvar cyim-version "1.1")
 
 ;;;_. emacs21 compatible
 (when (not (fboundp 'number-sequence))
@@ -57,6 +57,7 @@ file           对应的文件名
 
 (defvar cyim-current-key "" "已经输入的代码")
 (defvar cyim-current-str "" "当前选择的词条")
+(defvar cyim-current-temp "" "当前选择的词条")
 (defvar cyim-current-choices nil "所有可选的词条。
 
 这个 list 的 CAR 是可选的词条，一般是一个字符串列表，但是也可以含有
@@ -95,8 +96,11 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
 (defvar cyim-quick-en t
   "默认打开快速英文切换功能")
 
+(defvar cyim-quick-en-on nil 
+  "是否已经进入快速英文状态")
+
 (defvar cyim-show-first t
-  "默认打开快速英文切换功能")
+  "显示第一项")
 
 (defvar cyim-current-length 0
   "当前选择的词条字数")
@@ -115,16 +119,27 @@ completion  下一个可能的字母（如果 cyim-do-completion 为 t）
       (define-key map (char-to-string i) 'cyim-number-select))
     (dolist (i (number-sequence ?A ?Z))
       (define-key map (char-to-string i) 'cyim-en-toggle))
-    (define-key map " " 'cyim-select-current)
+    ;; (define-key map " " 'cyim-select-current)
+    (define-key map " " 'cyim-j1)
     (define-key map [backspace] 'cyim-delete-last-char)
     (define-key map [delete] 'cyim-delete-last-char)
     (define-key map "\C-z" 'cyim-delete-last-char)
+    (define-key map (kbd "<left>") 'cyim-delete-last-char)
     (define-key map "\C-n" 'cyim-next-page)
     (define-key map "\C-p" 'cyim-previous-page)
     (define-key map "\C-m" 'cyim-quit-no-clear)
     (define-key map "\C-c" 'cyim-quit-clear)
-    (define-key map (kbd "M-SPC") 'cyim-toggle)
+    (define-key map (kbd "C-,") 'cyim-punc1)
+    (define-key map (kbd "C-.") 'cyim-punc2)
+    ;; (define-key map (kbd "M-SPC") 'cyim-toggle)
+    (define-key map (kbd "s-0") 'cyim-toggle)
     (define-key map (kbd "C-g") 'cyim-toggle)
+    (define-key map (kbd "s-j") 'cyim-number-select-char-j1)
+    (define-key map (kbd "s-k") 'cyim-number-select-char-k2)
+    (define-key map (kbd "s-l") 'cyim-number-select-char-l3)
+    (define-key map (kbd "s-u") 'cyim-number-select-char-u4)
+    (define-key map (kbd "s-i") 'cyim-number-select-char-i5)
+    (define-key map (kbd "s-o") 'cyim-number-select-char-o6)
     map)
   "Keymap")
 
@@ -604,13 +619,32 @@ beginning of line"
           (member last-command-event cyim-first-char)
         (member last-command-event cyim-total-char))
       (progn
-        (setq cyim-current-key (concat cyim-current-key (char-to-string last-command-event)))
-        (funcall cyim-handle-function)
+        (if (= (length cyim-current-key) 4)
+            (progn
+              (when (< 1 (length (car cyim-current-choices)))
+                (setq cyim-current-temp
+                      (concat cyim-current-temp
+                              (car (car cyim-current-choices)))))
+              (setq cyim-current-key (char-to-string last-command-event)))
+          (setq cyim-current-key (concat cyim-current-key (char-to-string last-command-event))))
 
+        (when (< 0 (length cyim-current-temp))
+          (insert cyim-current-temp))
+        
+        ;; (setq cyim-current-key (concat cyim-current-key (char-to-string last-command-event)))
+        (funcall cyim-handle-function)
+        (when (= (length cyim-current-key) 1)
+          (when (member cyim-current-key (list "a" "e" "i" "o" "u"))
+            (cyim-terminate-translation)
+            ;; (message "")
+            ))
         ;; 如果输入了4个字母，且选项唯一，自动上第一个
         (when (= (length cyim-current-key) 4)
           (when (= 1 (length (car cyim-current-choices)))
-            (cyim-terminate-translation))
+            ;; (cyim-terminate-translation)
+            (cyim-j1)
+            ;; (message "")
+            )
           ;; 没有词时只显示key
           (when (string= cyim-current-str cyim-current-key)
             (setq cyim-current-str "")
@@ -619,9 +653,19 @@ beginning of line"
     (cyim-append-string (cyim-translate last-command-event))
     (cyim-terminate-translation)))
 
-(defun cy-insert ()
+(defun cyim-insert ()
   (interactive)
   (insert " "))
+
+(defun cyim-punc1 ()
+  (interactive)
+  (call-interactively 'cyim-select-current)
+  (cyim-append-string (cyim-translate ?,)))
+
+(defun cyim-punc2 ()
+  (interactive)
+  (call-interactively 'cyim-select-current)
+  (cyim-append-string (cyim-translate ?.)))
 
 (defun cyim-select-current ()
   "如果没有可选项，而且是用空格来绑定这个键，就插入空格，否则选择第一
@@ -637,8 +681,9 @@ beginning of line"
 
   ;; 输入空格时，自动切换到英文状态
   (when (and cyim-quick-en (string= cyim-current-str " "))
+    (setq cyim-quick-en-on t)
     (call-interactively 'toggle-input-method)
-    (call-interactively 'cy-insert)))
+    (call-interactively 'cyim-insert)))
 
 (defun cyim-remember-select (&optional pos)
   (let ((rest (emms-delete-if (lambda (p) (string= (car p) "pos"))
@@ -646,21 +691,79 @@ beginning of line"
     (setq rest (append rest (list (cons "pos" (or pos
                                                   cyim-current-pos)))))
     (puthash cyim-current-key (cons (car cyim-current-choices)
-                                   rest) (cyim-history))))
+                                    rest) (cyim-history))))
 
-(defun cyim-number-select ()
-  "如果没有可选项，插入数字，否则选择对应的词条"
-  (interactive)
+(defun cyim-number-select-char (char)
   (if (car cyim-current-choices)
-      (let ((index (+ (cyim-page-start) (- last-command-event ?2)))
+      (let ((index (+ (cyim-page-start) (- char ?2)))
             (end (cyim-page-end)))
         (if (>= index end)
             (cyim-show)
           (cyim-remember-select (1+ index))
-          (setq cyim-current-str (cyim-choice (nth index (car cyim-current-choices))))
+          (setq cyim-current-str (concat (cyim-choice (nth index (car cyim-current-choices)))
+                                         cyim-current-temp))
           (cyim-terminate-translation)))
-    (cyim-append-string (char-to-string last-command-event))
+    (cyim-append-string (char-to-string char))
     (cyim-terminate-translation)))
+
+(defun cyim-j1 ()
+  "select firest"
+  (interactive)
+  (if (car cyim-current-choices)
+      (let ((index (+ (cyim-page-start) (- ?1 ?2)))
+            (end (cyim-page-end)))
+        (if (>= index end)
+            (cyim-show)
+          (cyim-remember-select (1+ index))
+          (setq cyim-current-str (concat cyim-current-temp
+                                         (cyim-choice (nth index (car cyim-current-choices)))
+                                         ))
+          (cyim-terminate-translation)
+          ))
+    (when cyim-quick-en
+      (setq cyim-quick-en-on t)
+      (call-interactively 'toggle-input-method)
+      (call-interactively 'cyim-insert))
+    (cyim-terminate-translation)
+    )
+  (setq cyim-current-temp "")
+  )
+
+(defun cyim-number-select ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char last-command-event)
+  )
+
+(defun cyim-number-select-char-j1 ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char ?1))
+
+(defun cyim-number-select-char-k2 ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char ?2))
+
+(defun cyim-number-select-char-l3 ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char ?3))
+
+(defun cyim-number-select-char-u4 ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char ?4))
+
+(defun cyim-number-select-char-i5 ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char ?5))
+
+(defun cyim-number-select-char-o6 ()
+  "如果没有可选项，插入数字，否则选择对应的词条"
+  (interactive)
+  (cyim-number-select-char ?6))
 
 (defun cyim-quit-clear ()
   (interactive)
@@ -946,72 +1049,4 @@ to the position of point in the selected window."
     (x-show-tip (propertize text 'face 'cyim-tooltip-face)
                 nil params cyim-tooltip-timeout)))
 
-;;;_. utils
-;;;###autoload
-(defun cyim-create-word-file ()
-  "创建一个能用于 cyim 的新文件，按说明填入相应的内容就能生成对应的输入法"
-  (interactive)
-  (let ((buffer (generate-new-buffer "cyim-word")))
-    (switch-to-buffer buffer)
-    (insert
-     "[Comment]\n"
-     "要创建一个新的 cyim 输入法文件，最简单的方法是只要在 Table 部分填入码表\n"
-     "就行了。更多的设置如下：\n"
-     "# 控制是否进入转换。一般设置成所有词库中的首字母\n"
-     "first-char=\n"
-     "# 控制是否退出转换，一般设置成所有词库中的字母\n"
-     "total-char=\n"
-     "# 在启动时 load 的 elisp 文件\n"
-     "lib=\n"
-     "# 其它词库文件，用 ; 隔开\n"
-     "other-files=\n"
-     "# 每页显示的词条数目\n"
-     "page-length=\n\n"
-     "如果需要加入标点，加入一个 Punctuation 部分。然后设置 cyim-translate-fuction。\n"
-     "如果需要排序，或者合并相同编码的词条，使用 C-c C-c 或者 M-x cyim-build-table。\n"
-     "如果有需要，可能还要修改 first-char 和 total-char\n\n"
-     "[Parameter]\n"
-     "first-char=abcdefghijklmnopqrstuvwxyz\n"
-     "total-char=abcdefghijklmnopqrstuvwxyz\n\n"
-     "[Description]\n"
-     "\n\n"
-     "[Table]\n"
-     )
-    (local-set-key "\C-c\C-c" 'cyim-build-table)))
-
-;;;###autoload
-(defun cyim-build-table ()
-  (interactive)
-  (save-restriction
-    (let ((table (cyim-section-region "Table"))
-          (param (cyim-section-region "Parameter"))
-          (lastw "")
-          first-char total-char currw)
-      (narrow-to-region (car table) (cdr table))
-      (perform-replace "[ \t]+$" "" nil t nil nil nil (point-min) (point-max))
-      (sort-lines nil (point-min) (point-max))
-      (goto-char (point-min))
-      (while (not (eobp))
-        (if (looking-at "^[ \t]*$")     ; 如果有空行，删除
-            (cyim-delete-line)
-          (setq currw (cyim-code-at-point))
-          (add-to-list 'first-char (aref currw 0))
-          (mapc (lambda (c) (add-to-list 'total-char c)) (append currw nil))
-          (if (string= currw lastw)
-              (delete-region (1- (point)) (+ (point) (length currw))))
-          (setq lastw currw)
-          (forward-line 1)))
-      (narrow-to-region (car param) (cdr param))
-      (goto-char (point-min))
-      (insert "first-char=" (concat first-char) "\n"
-              "total-char=" (concat total-char) "\n")
-      (while (not (eobp))
-        (if (or (looking-at "^first-char=")
-                (looking-at "^total-char="))
-            (cyim-delete-line)
-          (forward-line 1)))
-      (if (looking-at "^$")
-          (delete-backward-char 1)))))
-
 (provide 'cyim)
-;;; cyim.el ends here

@@ -1,13 +1,12 @@
 # 穿越中文输入法 Emacs 版 (Cyim-emacs)
 
-版本： 1.0
+版本： 1.1
 
-作者： cy2081@sina.cn
-
-穿越中文输入法（Cyim）是一种简单易学输入快速的汉字输入方法，目标是成为软件编程人员易于使用的中文输入法。
+作者： huxifun@sina.com
 
 Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷方便。除了具有基本的功能外，主要特点有：
 
+ - 软件编程人员易于使用的中文输入法
  - 完善的中文编码，重码率低。
  - 中英文切换方便，输入更为流畅。
  - 遇到空格和大写字母自动切换到英文输入。
@@ -26,13 +25,12 @@ Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷�
  - [5. 词库](#sec-4)
  - [6. 其它版本](#sec-5)
      - [6.1 Android 手机版](#sec-51)
-     - [6.2 Linux Fcitx 版](#sec-52)
-     - [6.3 Vim 版](#sec-53)
+     - [6.2 Vim 版](#sec-53)
  - [7. 感谢](#sec-6)
 
 ## 1. 中文编码<a id="sec-0"></a>
 
-中文编码方法见 `docs` 文档目录中的 [chinese-cy.html](docs/chinese-cy.html)
+中文编码方法见 `docs` 文档目录， 请参考 [小小音形输入法](http://xxyx.ys168.com/)
 
 ## 2. 安装<a id="sec-1"></a>
 
@@ -147,11 +145,7 @@ git clone https://github.com/cy2081/cyim-emacs.git
 
 先安装 `Termux` 和黑客键盘（Hacker’s Keyboard），再安装 Emacs，再按照上边的方法配置。
 
-### 6.2 Linux Fcitx 版<a id="sec-52"></a>
-
-请把 `fcitx/table 中的文件`， 复制到主目录中的 `.config/fcitx/table` 中。可能需要重启 fcitx 输入法，然后选择穿越中文输入法。
-
-### 6.3 Vim 版<a id="sec-53"></a>
+### 6.2 Vim 版<a id="sec-53"></a>
 
 详见 <https://github.com/cy2081/vim-cyim>
 
