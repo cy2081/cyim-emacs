@@ -28,7 +28,9 @@ Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷�
 
 ## 1. 中文编码<a id="sec-0"></a>
 
-中文编码方法见 `docs` 文档目录， 请参考 [小小音形输入法](http://xxyx.ys168.com/)
+推荐：[超强快码](http://fds8866.ys168.com/)
+
+[小小音形输入法](http://xxyx.ys168.com/)
 
 ## 2. 安装<a id="sec-1"></a>
 
