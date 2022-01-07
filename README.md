@@ -1,6 +1,6 @@
 # 穿越中文输入法 Emacs 版 (Cyim-emacs)
 
-版本： 1.1
+版本： 1.2
 
 作者： huxifun@sina.com
 
@@ -27,8 +27,6 @@ Cyim-emacs 是在 Emacs 中使用的中文输入法，输入中文比较快捷�
      - [5.2 Vim 版](#sec-52)
 
 ## 1. 中文编码<a id="sec-0"></a>
-
-推荐：[超强快码](http://fds8866.ys168.com/)
 
 [小小音形输入法](http://xxyx.ys168.com/)
 

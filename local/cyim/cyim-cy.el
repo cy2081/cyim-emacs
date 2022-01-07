@@ -4,7 +4,7 @@
 ;; 1. 能导入输入历史
 ;; 2. 提供造词的命令
 ;; 3. 提供候选的单字
-;; 4. 拼音输入，提示五笔字根
+;; 4. 拼音输入
 ;; 5. 处理标点
 ;; 6. 使用 [ ' 快速选择
 
@@ -75,7 +75,8 @@
   (let ((map (cyim-mode-map)))
     (define-key map "\t" 'cyim-table-show-completion)
     (define-key map "[" 'cyim-quick-select-1)     ;; cy 中用到了 ;
-    (define-key map "'" 'cyim-quick-select-2))
+    ;(define-key map "'" 'cyim-quick-select-2)
+    )
   (defvar cyim-cy-use-gbk nil)
   (let ((path (file-name-directory load-file-name)))
     (load (concat path
