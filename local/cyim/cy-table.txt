@@ -48,6 +48,7 @@ baa 别
 baae 卟
 baau 呗 蹦 嘣
 baba 蹦蹦
+babb 哔剥
 babe 别被
 babf 鄙背
 babg 鄙薄
@@ -131573,7 +131574,7 @@ tzzw 挑战自我
 tzzx 通知中心
 tzzy 题中之义
 tzzz 铁中铮铮
-u 也babb 哔剥
+u 也
 v 有
 va 啊
 vaa 嗯
