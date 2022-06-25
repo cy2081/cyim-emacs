@@ -1,3 +1,8 @@
+注意：以下为旧文件，已简化升级为[呼吸输入法](https://github.com/huxi-fun/huxi)，详见
+
+https://github.com/huxi-fun/huxi
+
+--------
 # 穿越中文输入法 Emacs 版 (Cyim-emacs)
 
 版本： 1.2
